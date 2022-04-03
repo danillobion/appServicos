@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import getRealm from '../../services/realm';
 import Api from '../../Api';
 import Realm from "realm";
+import {StatusBar} from "react-native";
 
 import Logo from '../../assets/logo.svg';
 
@@ -128,6 +129,7 @@ export default () => {
     });
     return (
         <Container>
+            <StatusBar backgroundColor="transparent" translucent hidden/>
             <Loading>
                 <Logo width="100%" height="100" />
                 <LoadingIcon size="large" color="#fff"/>

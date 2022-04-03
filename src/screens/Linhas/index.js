@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from 'react';
-import { Button, Text, BackHandler,Alert   } from 'react-native';
+import { Button, Text, BackHandler,Alert, StatusBar   } from 'react-native';
 import { Container, HeaderTitle,HeaderAreaLegenda } from '../../style/global';
 import { Scroller, SearchButton, HeaderArea, ListArea, HeaderSubTitle } from '../Linhas/style';
 
@@ -55,6 +55,7 @@ export default () => {
 
     return (
         <Container>
+            <StatusBar backgroundColor="transparent" translucent  barStyle='light-content'/>
                 <HeaderArea>
                     <HeaderTitle>Linhas</HeaderTitle>
                     <SearchButton>

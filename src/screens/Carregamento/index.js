@@ -7,7 +7,7 @@ import getRealm from '../../services/realm';
 import Api from '../../Api';
 import Realm from "realm";
 
-import IconOnibus from '../../assets/icon_bus.svg';
+import Logo from '../../assets/logo.svg';
 
 export default () => {
     const navigation = useNavigation();
@@ -129,7 +129,7 @@ export default () => {
     return (
         <Container>
             <Loading>
-                <IconOnibus width="100%" height="100" />
+                <Logo width="100%" height="100" />
                 <LoadingIcon size="large" color="#fff"/>
                 <StyledText>Carregando</StyledText>
             </Loading>

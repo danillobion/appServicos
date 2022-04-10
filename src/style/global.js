@@ -13,9 +13,10 @@ export const StyledText = styled.Text`
     font-size:18px;
 `
 export const HeaderTitle = styled.Text`
-    font-size:35px;
+    font-size:25px;
     font-weight:bold;
     color:#FFC700;
+    margin-top: 5.9px;
 `;
 export const HeaderAreaLegenda = styled.View`
     flex-direction:row

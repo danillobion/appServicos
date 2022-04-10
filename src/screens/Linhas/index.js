@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from 'react';
 import { Button, Text, BackHandler,Alert, StatusBar   } from 'react-native';
 import { Container, HeaderTitle,HeaderAreaLegenda } from '../../style/global';
-import { Scroller, SearchButton, HeaderArea, ListArea, HeaderSubTitle } from '../Linhas/style';
+import { Scroller, SearchButton, HeaderArea, ListArea, HeaderSubTitle, HeaderMenu, ContainerItem } from '../Linhas/style';
 
 import SearchIcon from '../../assets/icon_pesquisar.svg'
 import ItemArea from '../../components/ItemArea/index'
@@ -9,6 +9,9 @@ import Api from '../../Api';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import getRealm from '../../services/realm';
+
+import IconLogo from '../../assets/logo_vai_descer_moto.svg';
+import IconLogoInsta from '../../assets/icon_instagram.svg';
 
 export default () => {
 
@@ -20,7 +23,7 @@ export default () => {
         const realm = await getRealm();
         const linhas = realm.objects('Linhas');
         // list.forEach(item => {
-        //     console.log(item.linha);
+        //     console.log("opa", item.id, item.linha);
         // });
         setList([]);
         setList(linhas);
@@ -56,6 +59,14 @@ export default () => {
     return (
         <Container>
             <StatusBar backgroundColor="transparent" translucent  barStyle='light-content'/>
+                <HeaderMenu>
+                    <ContainerItem>
+                        <IconLogo width="250" height="55"/>
+                    </ContainerItem>
+                    <ContainerItem>
+                        <IconLogoInsta width="20" height="20"/>
+                    </ContainerItem>
+                </HeaderMenu>
                 <HeaderArea>
                     <HeaderTitle>Linhas</HeaderTitle>
                     <SearchButton>

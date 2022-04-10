@@ -41,7 +41,7 @@ export default () => {
 
     const [userInfo, setUserInfo] = useState({
         id: route.params.id,
-        empresa: route.params.empresa,
+        empresa_id: route.params.empresa_id,
         linha: route.params.linha,
         numero: route.params.numero,
         tempoDeEspera: route.params.tempoDeEspera,
@@ -109,12 +109,7 @@ export default () => {
         setTituloSabado(true);
         setTituloDomingo(false);
     }
-    const getParadas = async () => {
-        const realm = await getRealm();
-        const paradas = realm.objects('Paradas').filtered("linha_id == "+route.params.id);
-        setListParadas([]);
-        setListParadas(paradas);
-    }
+
     const getHorarios = async () => {
         const realm = await getRealm();
         //util
@@ -130,18 +125,30 @@ export default () => {
         setListHorarioDomingo([]);
         setListHorarioDomingo(horarioDomingo);
     }
+    const getParadas =async () => {
+        const realm = await getRealm();
+        const linhasEParada = realm.objects('Linhas_Parada');
+        setListParadas([]);
+        let arrayTemp = [];
+        linhasEParada.map((obj) => {
+            if(obj.linha_id ===  route.params.id){
+                let paradas = realm.objects('Paradas').filtered("id == "+obj.parada_id);
+                arrayTemp.push(paradas[0]);
+            }
+        });
+        setListParadas(arrayTemp);
+    }
 
       //assim que a tela for carregada eu chamo a funcao
       useEffect(() => {
-        // handlerClickButtonAba1();
-        getParadas();
-        getHorarios();
+        getParadas(); //carregar as paradas
+        getHorarios(); //carregar os horarios
     }, []);
 
     return (
         <Container>
             <HeaderArea>
-                <BackButton  onPress={handlerClick}>
+                <BackButton onPress={() => navigation.goBack()}>
                     <IconEsquerda width="25" height="25" 
                         style={{
                             margin:10,

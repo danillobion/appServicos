@@ -18,8 +18,9 @@ export default () => {
         // console.log("carregarBD", list.dados.linhas);
 
         apagarBancoDeDados(); //resetar banco
-        empresa(list.dados.empresas);
+        empresas(list.dados.empresas);
         linhas(list.dados.linhas);
+        linha_parada(list.dados.linha_parada);
         paradas(list.dados.paradas);
         horarios(list.dados.horario);
         // visualizarBD(list.dados.empresas);
@@ -34,7 +35,7 @@ export default () => {
     /*
     * Funcao responsavel por povoar a tabela empresa
     */
-    const empresa = async(value) => {
+    const empresas = async(value) => {
         const realm = await getRealm();
         value.forEach(obj => {
             realm.write(() => {
@@ -50,9 +51,10 @@ export default () => {
     */
     const linhas = async(value) => {
         const realm = await getRealm();
-        value.forEach(obj => {
+        value.map((obj,index) => {
             realm.write(() => {
                 realm.create('Linhas', {
+                    id: index,
                     empresa_id: obj.empresa_id,
                     linha: obj.linha,
                     numero: obj.numero,
@@ -63,14 +65,33 @@ export default () => {
         });
     }
     /*
+    * Funcao responsavel por povoar a tabela linha_parada
+    */
+    const linha_parada = async(value) => {
+        const realm = await getRealm();
+        value.map((obj,index) => {
+            realm.write(() => {
+                realm.create('Linhas_Parada', {
+                    linha_id: obj.linha_id,
+                    parada_id: obj.parada_id,
+                });
+            });
+        });
+        
+        // let item = realm.objects('Linhas_Parada');
+        // item.forEach(item => {
+        //     console.log("opa", item.linha_id);
+        // });
+    }
+    /*
     * Funcao responsavel por povoar a tabela paradas
     */
     const paradas = async(value) => {
         const realm = await getRealm();
-        value.forEach(obj => {
+        value.map((obj,index) => {
             realm.write(() => {
                 realm.create('Paradas', {
-                    linha_id: obj.linha_id,
+                    id: index,
                     rua: obj.rua,
                     latitude: obj.latitude,
                     longitude: obj.longitude,
@@ -83,9 +104,10 @@ export default () => {
     */
     const horarios = async(value) => {
         const realm = await getRealm();
-        value.forEach(obj => {
+        value.map((obj,index) => {
             realm.write(() => {
                 realm.create('Horarios', {
+                    id: index,
                     linha_id: obj.linha_id,
                     dia: obj.dia,
                     horarioBairro: obj.horarioBairro,
@@ -120,6 +142,15 @@ export default () => {
                 });
             }, 3000)
         };
+
+        // if(carregarBD()){
+        //      setTimeout(() => {
+        //         navigation.reset({
+        //             routes:[{name:'MainStack'}]
+        //         });
+        //     }, 3000)
+        // };
+
         // if(carregarBD()){
         //      setTimeout(() => {
         //         navigation.navigate("Linhas");

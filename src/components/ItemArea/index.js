@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 import { Area, InfoArea, TitleLinha, TitleEmpresaDeOnibus, ContainerEsquerdo, ContainerDireita, TitleNumeroDaLinha, ContainerIcone  } from '../ItemArea/style';
 import { useNavigation } from '@react-navigation/native';
 
@@ -6,16 +6,18 @@ import IconOnibus from '../../assets/icon_bus.svg';
 import IconDireita from '../../assets/icon_direita.svg';
 
 export default ({data}) => {
-    const navigation = useNavigation();
+    var navigation = useNavigation();
     const handlerClick = () => {
-        navigation.navigate("Paradas", {
-            id: data.empresa_id,
+        navigation.push("Paradas", {
+            id: data.id,
+            empresa_id: data.empresa_id,
             linha: data.linha,
             numero: data.numero,
             tempoDeEspera: data.tempoDeEspera,
             valor: data.valor,
         });
-    }
+    ;}
+
     return (
         <Area onPress={handlerClick}>
             {/* icone do bus */}

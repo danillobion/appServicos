@@ -7,7 +7,7 @@ export const HeaderArea = styled.View`
     width:100%;
     padding-left:20px;
     padding-right:20px;
-    padding-top:20px;
+    padding-top:35px;
 `;
 export const BackButton = styled.TouchableOpacity`
     flex-direction:row;

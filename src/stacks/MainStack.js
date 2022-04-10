@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Carregamento from '../screens/Carregamento/index'
 import Linhas from '../screens/Linhas/index'
 import Paradas from '../screens/Paradas/index'
+import OutrasLinhas from '../screens/OutrasLinhas/index'
 
 const Stack = createNativeStackNavigator();
 
@@ -16,5 +16,6 @@ export default () => (
         {/* <Stack.Screen name='Carregamento' component={Carregamento} /> */}
         <Stack.Screen name='Linhas' component={Linhas} />
         <Stack.Screen name='Paradas' component={Paradas} />
+        <Stack.Screen name='OutrasLinhas' component={OutrasLinhas} />
     </Stack.Navigator>
   );

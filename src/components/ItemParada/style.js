@@ -2,12 +2,13 @@
 
 import styled from 'styled-components/native';
 
-export const Area = styled.View`
+export const Area = styled.TouchableOpacity`
     margin-bottom:10px;
     padding:10px;
     flex-direction:row;
     border-bottom-width: 1px;
-    border-bottom-color:#363636;
+    border-bottom-color:#363636
+    justifyContent:space-between;
 `;
 export const ContainerIcone = styled.View`
     justifyContent:space-between;
@@ -34,4 +35,13 @@ export const TitleLinha = styled.Text`
 export const TitleEmpresaDeOnibus = styled.Text`
     fontSize:16px;
     color:#C1C1C1;
+`;
+export const ContainerEsquerdo = styled.View`
+    flex-direction:row;
+    margin-top:-1px;
+    margin-left:10px;
+`;
+export const ContainerDireita = styled.View`
+    margin-top:5px;
+    margin-right:5px;
 `;

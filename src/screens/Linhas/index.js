@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from 'react';
-import { Button, Text, BackHandler,Alert, StatusBar   } from 'react-native';
+import { Button, Text, BackHandler,Alert, StatusBar,Linking   } from 'react-native';
 import { Container, HeaderTitle,HeaderAreaLegenda } from '../../style/global';
-import { Scroller, SearchButton, HeaderArea, ListArea, HeaderSubTitle, HeaderMenu, ContainerItem } from '../Linhas/style';
+import { Scroller, SearchButton, HeaderArea, ListArea, HeaderSubTitle, HeaderMenu, ContainerItem,LinkAcesso } from '../Linhas/style';
 
 import SearchIcon from '../../assets/icon_pesquisar.svg'
 import ItemArea from '../../components/ItemArea/index'
@@ -55,6 +55,9 @@ export default () => {
             // return () => backHandler.remove();
         
     }, []);
+    const handlerClickLink = () => {
+        Linking.openURL("http://www.instagram.com/vaidescermoto_oficial/");
+    }
 
     return (
         <Container>
@@ -64,7 +67,9 @@ export default () => {
                         <IconLogo width="250" height="55"/>
                     </ContainerItem>
                     <ContainerItem>
-                        <IconLogoInsta width="20" height="20"/>
+                        <LinkAcesso onPress={handlerClickLink}>
+                            <IconLogoInsta width="20" height="20"/>
+                        </LinkAcesso>
                     </ContainerItem>
                 </HeaderMenu>
                 <HeaderArea>
@@ -74,7 +79,14 @@ export default () => {
                     </SearchButton>
                 </HeaderArea>
                 <HeaderAreaLegenda>
-                    <HeaderSubTitle>O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. </HeaderSubTitle>
+                    <HeaderSubTitle>
+                        Este aplicativo é uma produção independente de consulta das linhas de transporte de Garanhuns/PE. 
+                    </HeaderSubTitle>
+                </HeaderAreaLegenda>
+                <HeaderAreaLegenda>
+                    <HeaderSubTitle  style={{marginTop: 3}}>
+                        Não possuímos nenhum vínculo de empresa ou órgão. 
+                    </HeaderSubTitle>
                 </HeaderAreaLegenda>
             <Scroller>
 

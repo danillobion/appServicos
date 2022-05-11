@@ -56,7 +56,7 @@ export default () => {
                     </SearchButton>
                 </HeaderArea>
                 <HeaderAreaLegenda>
-                    <HeaderSubTitle>O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. </HeaderSubTitle>
+                    <HeaderSubTitle>Já sabe qual motô vai passar por essa parada? Veja a lista de ônibus.</HeaderSubTitle>
                 </HeaderAreaLegenda>
             <Scroller>
 

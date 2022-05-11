@@ -7,29 +7,33 @@ import getRealm from '../../services/realm';
 import Api from '../../Api';
 import Realm from "realm";
 import {StatusBar} from "react-native";
+import {useNetInfo} from '@react-native-community/netinfo';
 
 import Logo from '../../assets/logo.svg';
 
 export default () => {
     const navigation = useNavigation();
-
+    const netInfo = useNetInfo();
+    
     const carregarBD =  async () => {
-        let list = await Api.getTransporteUrbanoMunicipal(); // trocar essa consulta a API pela Realm
-        // console.log("carregarBD", list.dados.linhas);
-
-        apagarBancoDeDados(); //resetar banco
-        empresas(list.dados.empresas);
-        linhas(list.dados.linhas);
-        linha_parada(list.dados.linha_parada);
-        paradas(list.dados.paradas);
-        horarios(list.dados.horario);
-        // visualizarBD(list.dados.empresas);
-        
         const realm = await getRealm();
-        // const tasks = realm.objects("Linhas");
-        // console.log(tasks.map((task) => task.linha));
+        // if(netInfo.isConnected){
+            let list = await Api.getDados();
+            if(list.status == true){
+                apagarBancoDeDados(); //resetar banco
+                empresas(list.dados.empresas);
+                linhas(list.dados.linhas);
+                linha_parada(list.dados.linha_parada);
+                paradas(list.dados.paradas);
+                horarios(list.dados.horarios);
+                // visualizarBD(list.dados.empresas);
+            }
+        // }
+        // const element = realm.objects("Empresas");
+        // console.log(tasks.map((task) => task.nome));
+        // console.log(element.length);
 
-        realm.close(); //fechar banco
+        //realm.close(); //fechar banco
         return true;
     }
     /*
@@ -54,11 +58,11 @@ export default () => {
         value.map((obj,index) => {
             realm.write(() => {
                 realm.create('Linhas', {
-                    id: index,
+                    id: obj.id,
                     empresa_id: obj.empresa_id,
-                    linha: obj.linha,
+                    linha: obj.nome,
                     numero: obj.numero,
-                    tempoDeEspera: obj.tempoDeEspera,
+                    tempoDeEspera: parseInt(obj.tempo_de_espera),
                     valor:obj.valor,
                 });
             });
@@ -80,7 +84,7 @@ export default () => {
         
         // let item = realm.objects('Linhas_Parada');
         // item.forEach(item => {
-        //     console.log("opa", item.linha_id);
+        //     console.log("opa", item.parada_id);
         // });
     }
     /*
@@ -91,13 +95,17 @@ export default () => {
         value.map((obj,index) => {
             realm.write(() => {
                 realm.create('Paradas', {
-                    id: index,
+                    id: obj.id,
                     rua: obj.rua,
                     latitude: obj.latitude,
                     longitude: obj.longitude,
                 });
             });
         });
+        // let item = realm.objects('Paradas');
+        // item.forEach(item => {
+        //     console.log("opa", item.rua);
+        // });
     }
     /*
     * Funcao responsavel por povoar a tabela horarios
@@ -110,8 +118,8 @@ export default () => {
                     id: index,
                     linha_id: obj.linha_id,
                     dia: obj.dia,
-                    horarioBairro: obj.horarioBairro,
-                    horarioCentro: obj.horarioCentro,
+                    horarioBairro: obj.horario_bairro,
+                    horarioCentro: obj.horario_centro,
                 });
             });
         });
@@ -125,39 +133,33 @@ export default () => {
     * funcao responsavel por listar o conteudo da tabela realmDB
     */
     const visualizarBD = async(list) => {
+        // const realm = await getRealm();
+        //  //mostrar
+        // let item = realm.objects('Empresas');
+        // list.forEach(item => {
+        //     console.log(item.nome);
+        // });
+    }
+    /*
+    * Funcao responsavel por fechar o banco apos o carregamento
+    */
+    const fecharbanco = async() =>{
         const realm = await getRealm();
-         //mostrar
-        let item = realm.objects('Empresas');
-        list.forEach(item => {
-            console.log(item.nome);
-        });
+        realm.close();
     }
 
     //funcao responsavel por iniciar uma acao toda vez que a pagina for carregada
     useEffect(() => {
         if(carregarBD()){
-             setTimeout(() => {
+            setTimeout(() => {
+                fecharbanco();
                 navigation.reset({
                     routes:[{name:'MainStack'}]
                 });
-            }, 3000)
+            }, 4000)
         };
+    },[]);
 
-        // if(carregarBD()){
-        //      setTimeout(() => {
-        //         navigation.reset({
-        //             routes:[{name:'MainStack'}]
-        //         });
-        //     }, 3000)
-        // };
-
-        // if(carregarBD()){
-        //      setTimeout(() => {
-        //         navigation.navigate("Linhas");
-        //     }, 3000)
-        // };
-
-    });
     return (
         <Container>
             <StatusBar backgroundColor="transparent" translucent hidden/>

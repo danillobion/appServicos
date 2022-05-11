@@ -29,7 +29,9 @@ export const HeaderMenu = styled.View`
     align-Items:center;
     margin-top:40px;
     `;
-    export const ContainerItem = styled.View`
+export const ContainerItem = styled.View`
     margin-left:20px;
     margin-right:20px;
+`;
+export const LinkAcesso = styled.TouchableOpacity`
 `;

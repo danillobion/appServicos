@@ -42,6 +42,7 @@ export default () => {
     const [userInfo, setUserInfo] = useState({
         id: route.params.id,
         empresa_id: route.params.empresa_id,
+        nome: route.params.nome,
         linha: route.params.linha,
         numero: route.params.numero,
         tempoDeEspera: route.params.tempoDeEspera,
@@ -161,7 +162,7 @@ export default () => {
             {/* <Text>Linha: {userInfo.linha}</Text> */}
                 <InfoArea>
                     <HeaderText>Empresa</HeaderText>
-                    <HeaderText>ABC</HeaderText>
+                    <HeaderText>{userInfo.nome}</HeaderText>
                 </InfoArea>
                 <InfoArea>
                     <HeaderText>Número da linha</HeaderText>
@@ -169,7 +170,7 @@ export default () => {
                 </InfoArea>
                 <InfoArea>
                     <HeaderText>Valor da passagem</HeaderText>
-                    <HeaderText>R$ {userInfo.valor}</HeaderText>
+                    <HeaderText>{userInfo.valor}</HeaderText>
                 </InfoArea>
                 <InfoArea>
                     <HeaderText>Tempo de espera</HeaderText>
@@ -187,7 +188,8 @@ export default () => {
                 </ContainerAba>
                 <ContainerParadas  style={status1 ? null : { display: "none" }}>
                     <ContainerText>
-                        <AbaText>Paradas O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. </AbaText>
+                        <AbaText>Para saber qual é o motô que passa no ponto é só tocar na parada.
+                        </AbaText>
                     </ContainerText>
                     <ListArea>
                         {listParadas.map((item, k) => (
@@ -197,7 +199,14 @@ export default () => {
                 </ContainerParadas>
                 <ContainerHorarios style={status2 ?{ display: "none" } : null }>
                     <ContainerText>
-                        <AbaText>Horário O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. </AbaText>
+                        <AbaText>
+                            Não perca a hora, veja os horários que o motô vai passar.
+                        </AbaText>
+                    </ContainerText>
+                    <ContainerText>
+                        <AbaText style={{marginTop: 3}}>
+                            Os horários são fornecidos pelas empresas de transporte e podem sofrer alteração, sem aviso prévio.
+                        </AbaText>
                     </ContainerText>
                     <ContainerAbaHorarios>
                         <AbaHorarios>

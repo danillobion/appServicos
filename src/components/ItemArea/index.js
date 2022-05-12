@@ -33,7 +33,7 @@ export default ({data}) => {
                 </ContainerIcone>
                 <InfoArea>
                     <TitleLinha>{data.linha}</TitleLinha>
-                    <TitleEmpresaDeOnibus>R$ {data.valor}</TitleEmpresaDeOnibus>
+                    <TitleEmpresaDeOnibus>{data.valor}</TitleEmpresaDeOnibus>
                 </InfoArea>
             </ContainerEsquerdo>
             <ContainerDireita>
